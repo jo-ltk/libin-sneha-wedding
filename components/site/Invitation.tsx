@@ -33,7 +33,9 @@ export default function Invitation() {
             With the blessing of God and their families,{" "}
             <em className="text-ink">{wedding.couple.groomsFullName}</em> and{" "}
             <em className="text-ink">{wedding.couple.bridesFullName}</em>{" "}
-            invite you to celebrate their marriage.
+            invite you to celebrate their marriage on{" "}
+            <em className="text-ink">{wedding.event.displayDate}</em> at{" "}
+            <em className="text-ink">{wedding.event.displayTime}</em>.
           </p>
         </FadeUp>
       </div>

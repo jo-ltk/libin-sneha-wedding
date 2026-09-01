@@ -36,9 +36,9 @@ export const wedding = {
   },
   event: {
     /** ISO 8601 ceremony date & time in India Standard Time (UTC+05:30). */
-    dateTime: "",
-    displayDate: "",
-    displayTime: "",
+    dateTime: "2026-11-16T10:30:00+05:30",
+    displayDate: "Sunday, 16 November 2026",
+    displayTime: "10:30 AM",
   },
   contact: {
     phoneDisplay: "+91 95390 61358",

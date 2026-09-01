@@ -130,12 +130,12 @@ export default function Hero() {
       </motion.div>
 
       <motion.a
-        href="#invitation"
+        href="#countdown"
         className="absolute bottom-[calc(4rem+env(safe-area-inset-bottom))] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-ink/45 md:bottom-6"
         initial={reduce ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: enter + 0.7, duration: 0.8 }}
-        aria-label="Scroll to invitation"
+        aria-label="Scroll to countdown"
       >
         <motion.span
           className="h-7 w-px bg-ink/25"

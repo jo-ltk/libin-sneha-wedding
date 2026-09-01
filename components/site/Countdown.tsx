@@ -8,8 +8,8 @@ import {
   type CountdownValues,
 } from "@/lib/countdown";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { FadeUp, LineGrow } from "./Reveal";
 
 const UNITS = ["days", "hours", "minutes", "seconds"] as const;
 type UnitKey = (typeof UNITS)[number];
@@ -47,30 +47,17 @@ function CountdownUnit({
 }
 
 export default function Countdown() {
-  const dateTime = wedding.event.dateTime;
   const targetMs = useMemo(() => {
-    const parsed = parseWeddingDateTime(dateTime);
+    const parsed = parseWeddingDateTime(wedding.event.dateTime);
     return parsed ? parsed.getTime() : null;
-  }, [dateTime]);
+  }, []);
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const ornamentRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLSpanElement>(null);
-  const labelRef = useRef<HTMLParagraphElement>(null);
-  const dateRef = useRef<HTMLParagraphElement>(null);
-  const unitsWrapRef = useRef<HTMLDivElement>(null);
   const dayRef = useRef<HTMLSpanElement>(null);
   const hourRef = useRef<HTMLSpanElement>(null);
   const minuteRef = useRef<HTMLSpanElement>(null);
   const secondRef = useRef<HTMLSpanElement>(null);
-  const unitRefs: Record<UnitKey, RefObject<HTMLSpanElement | null>> = {
-    days: dayRef,
-    hours: hourRef,
-    minutes: minuteRef,
-    seconds: secondRef,
-  };
+  const glowRef = useRef<HTMLSpanElement>(null);
   const prevValues = useRef<CountdownValues | null>(null);
-  const pulseTween = useRef<gsap.core.Tween | null>(null);
 
   const [countdown, setCountdown] = useState<CountdownValues>(() =>
     targetMs !== null
@@ -94,46 +81,17 @@ export default function Countdown() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 82%",
-          once: true,
-        },
-        defaults: { ease: "power2.out", immediateRender: false },
-      });
-
-      tl.from(ornamentRef.current, { scaleX: 0, opacity: 0, duration: 1.15 })
-        .from(
-          glowRef.current,
-          { opacity: 0, scale: 0.85, duration: 0.9 },
-          "-=0.55",
-        )
-        .from(labelRef.current, { opacity: 0, y: 14, duration: 0.75 }, "-=0.45")
-        .from(dateRef.current, { opacity: 0, y: 10, duration: 0.7 }, "-=0.35")
-        .from(
-          unitsWrapRef.current?.querySelectorAll(".countdown-unit") ?? [],
-          { opacity: 0, y: 18, duration: 0.8, stagger: 0.09 },
-          "-=0.25",
-        );
-
-      pulseTween.current = gsap.to(glowRef.current, {
-        opacity: 0.55,
-        scale: 1.08,
-        duration: 2.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: 1.4,
-      });
-    }, sectionRef);
+    const tween = gsap.to(glowRef.current, {
+      opacity: 0.55,
+      scale: 1.08,
+      duration: 2.8,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
 
     return () => {
-      pulseTween.current?.kill();
-      ctx.revert();
+      tween.kill();
     };
   }, [targetMs]);
 
@@ -151,17 +109,12 @@ export default function Countdown() {
       return;
     }
 
+    const refs = { days: dayRef, hours: hourRef, minutes: minuteRef, seconds: secondRef };
+
     UNITS.forEach((unit) => {
       if (prevValues.current![unit] === countdown[unit]) return;
 
-      const node =
-        unit === "days"
-          ? dayRef.current
-          : unit === "hours"
-            ? hourRef.current
-            : unit === "minutes"
-              ? minuteRef.current
-              : secondRef.current;
+      const node = refs[unit].current;
       if (!node) return;
 
       gsap.fromTo(
@@ -195,7 +148,6 @@ export default function Countdown() {
 
   return (
     <section
-      ref={sectionRef}
       id="countdown"
       aria-live="polite"
       aria-atomic="true"
@@ -211,87 +163,95 @@ export default function Countdown() {
       />
 
       <div className="relative mx-auto w-full max-w-3xl text-center">
-        <div className="mb-8 flex items-center justify-center gap-3 sm:mb-10">
-          <div
-            className="h-px flex-1 max-w-[4.5rem] bg-sand/55 sm:max-w-[5.5rem]"
-            aria-hidden="true"
-          />
-          <span
-            ref={glowRef}
-            className="h-1.5 w-1.5 shrink-0 rounded-full bg-clay/80"
-            aria-hidden="true"
-          />
-          <div
-            className="h-px flex-1 max-w-[4.5rem] bg-sand/55 sm:max-w-[5.5rem]"
-            aria-hidden="true"
-          />
-        </div>
+        <FadeUp>
+          <div className="mb-8 flex items-center justify-center gap-3 sm:mb-10">
+            <div
+              className="h-px flex-1 max-w-[4.5rem] bg-sand/55 sm:max-w-[5.5rem]"
+              aria-hidden="true"
+            />
+            <span
+              ref={glowRef}
+              className="h-1.5 w-1.5 shrink-0 rounded-full bg-clay/80"
+              aria-hidden="true"
+            />
+            <div
+              className="h-px flex-1 max-w-[4.5rem] bg-sand/55 sm:max-w-[5.5rem]"
+              aria-hidden="true"
+            />
+          </div>
+        </FadeUp>
 
-        <p
-          ref={labelRef}
-          className="mb-3 font-sans text-[0.62rem] font-medium uppercase tracking-[0.42em] text-clay sm:text-[0.68rem]"
-        >
-          Until our day
-        </p>
+        <FadeUp delay={0.05}>
+          <p className="mb-3 font-sans text-[0.62rem] font-medium uppercase tracking-[0.42em] text-clay sm:text-[0.68rem]">
+            Until our day
+          </p>
+        </FadeUp>
 
-        <p
-          ref={dateRef}
-          className="font-display text-[clamp(1.15rem,4.2vw,1.55rem)] leading-snug tracking-[-0.02em] text-ink"
-        >
-          {wedding.event.displayDate}
-          <span className="mx-2 text-sage" aria-hidden="true">
-            ·
-          </span>
-          <span className="text-muted">{wedding.event.displayTime}</span>
-        </p>
+        <FadeUp delay={0.1}>
+          <p className="font-display text-[clamp(1.15rem,4.2vw,1.55rem)] leading-snug tracking-[-0.02em] text-ink">
+            {wedding.event.displayDate}
+            <span className="mx-2 text-sage" aria-hidden="true">
+              ·
+            </span>
+            <span className="text-muted">{wedding.event.displayTime}</span>
+          </p>
+        </FadeUp>
 
-        <div
-          ref={ornamentRef}
-          className="mx-auto my-8 w-[min(220px,62vw)] origin-center sm:my-10"
-        >
-          <div className="horizon-line" aria-hidden="true" />
-        </div>
+        <LineGrow className="mx-auto my-8 w-[min(220px,62vw)] sm:my-10" delay={0.15} />
 
         {countdown.complete ? (
-          <p className="font-display text-[clamp(1.35rem,5vw,2rem)] italic tracking-[-0.02em] text-clay-deep">
-            Today we begin forever
-          </p>
+          <FadeUp delay={0.2}>
+            <p className="font-display text-[clamp(1.35rem,5vw,2rem)] italic tracking-[-0.02em] text-clay-deep">
+              Today we begin forever
+            </p>
+          </FadeUp>
         ) : (
-          <div
-            ref={unitsWrapRef}
-            className="mx-auto grid w-full max-w-[22rem] grid-cols-4 gap-x-1 gap-y-2 sm:max-w-none sm:gap-x-3 md:gap-x-5"
-            role="timer"
-            aria-label={liveLabel}
-          >
-            {UNITS.map((unit) => (
-              <CountdownUnit
-                key={unit}
-                label={UNIT_LABELS[unit]}
-                value={values[unit]}
-                unitRef={unitRefs[unit]}
-              />
-            ))}
-          </div>
+          <FadeUp delay={0.2}>
+            <div
+              className="mx-auto grid w-full max-w-[22rem] grid-cols-4 gap-x-1 gap-y-2 sm:max-w-none sm:gap-x-3 md:gap-x-5"
+              role="timer"
+              aria-label={liveLabel}
+            >
+              {UNITS.map((unit) => (
+                <CountdownUnit
+                  key={unit}
+                  label={UNIT_LABELS[unit]}
+                  value={values[unit]}
+                  unitRef={
+                    unit === "days"
+                      ? dayRef
+                      : unit === "hours"
+                        ? hourRef
+                        : unit === "minutes"
+                          ? minuteRef
+                          : secondRef
+                  }
+                />
+              ))}
+            </div>
+          </FadeUp>
         )}
 
         <p className="sr-only">{liveLabel}</p>
 
-        <div className="mx-auto mt-8 flex items-center justify-center gap-3 sm:mt-10">
-          <div
-            className="h-px flex-1 max-w-[4.5rem] bg-sand/45 sm:max-w-[5.5rem]"
-            aria-hidden="true"
-          />
-          <span
-            className="font-display text-lg italic leading-none text-sage/80"
-            aria-hidden="true"
-          >
-            &
-          </span>
-          <div
-            className="h-px flex-1 max-w-[4.5rem] bg-sand/45 sm:max-w-[5.5rem]"
-            aria-hidden="true"
-          />
-        </div>
+        <FadeUp delay={0.28}>
+          <div className="mx-auto mt-8 flex items-center justify-center gap-3 sm:mt-10">
+            <div
+              className="h-px flex-1 max-w-[4.5rem] bg-sand/45 sm:max-w-[5.5rem]"
+              aria-hidden="true"
+            />
+            <span
+              className="font-display text-lg italic leading-none text-sage/80"
+              aria-hidden="true"
+            >
+              &
+            </span>
+            <div
+              className="h-px flex-1 max-w-[4.5rem] bg-sand/45 sm:max-w-[5.5rem]"
+              aria-hidden="true"
+            />
+          </div>
+        </FadeUp>
       </div>
     </section>
   );
