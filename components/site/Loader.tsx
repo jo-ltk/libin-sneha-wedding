@@ -41,7 +41,7 @@ export default function Loader() {
             transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
           />
           <motion.div
-            className="absolute inset-y-0 right-0 w-1/2 bg-forest"
+            className="absolute inset-y-0 right-0 w-1/2 bg-dusk"
             initial={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
