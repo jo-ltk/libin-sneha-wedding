@@ -2,6 +2,7 @@ import Contact from "@/components/site/Contact";
 import Countdown from "@/components/site/Countdown";
 import Dock from "@/components/site/Dock";
 import Families from "@/components/site/Families";
+import FamilyMeeting from "@/components/site/FamilyMeeting";
 import Footer from "@/components/site/Footer";
 import Gallery from "@/components/site/Gallery";
 import Hero from "@/components/site/Hero";
@@ -24,6 +25,7 @@ export default function Home() {
         <Hero />
         <Countdown />
         <Invitation />
+        <FamilyMeeting />
         <Families />
         <Location />
         <Gallery />

@@ -77,6 +77,25 @@ const photos = [
 export const images = {
   hero: photos.map(({ src, alt }) => ({ src, alt })),
   gallery: photos.slice(1),
+  familyMeeting: [
+    {
+      src: "/images/family-meeting-1.jpg",
+      alt: "Libin and Sneha with their families at their first meeting",
+      caption: "A warm welcome",
+    },
+    {
+      src: "/images/family-meeting-2.jpg",
+      alt: "Libin and Sneha standing together as their families came together",
+      caption: "Two families, one joy",
+    },
+  ],
+} as const;
+
+export const familyMeeting = {
+  label: "A cherished memory",
+  heading: "When our families first came together",
+  subheading:
+    "Before the vows and the celebration, our families met — sharing smiles, blessings, and the quiet joy of two homes finding one another.",
 } as const;
 
 export const navLinks = [
