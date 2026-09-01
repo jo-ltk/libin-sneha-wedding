@@ -2,18 +2,18 @@
 
 :root {
   --paper: #faf8f4;
-  --mist: #eef4f8;
+  --mist: #dceaf2;
   --ink: #3d4a50;
-  --forest: #edf5ee;
-  --forest-mid: #dceee2;
-  --dusk: #ecf4f8;
-  --dusk-mid: #ddeaf2;
-  --clay: #85bdd6;
-  --clay-deep: #6aa8c9;
-  --sage: #a8c8ac;
-  --sand: #c5dcc8;
+  --forest: #d4e8d8;
+  --forest-mid: #bdd9c4;
+  --dusk: #d4e6f0;
+  --dusk-mid: #bdd4e4;
+  --clay: #7eb3d4;
+  --clay-deep: #5f9fc4;
+  --sage: #94b89a;
+  --sand: #b5d4ba;
   --muted: #6f7d82;
-  --line: rgba(133, 189, 214, 0.4);
+  --line: rgba(126, 179, 212, 0.45);
 }
 
 @theme inline {
