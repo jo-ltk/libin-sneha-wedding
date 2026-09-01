@@ -9,7 +9,7 @@ import {
 } from "@/lib/countdown";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 
 const UNITS = ["days", "hours", "minutes", "seconds"] as const;
 type UnitKey = (typeof UNITS)[number];
@@ -24,16 +24,16 @@ const UNIT_LABELS: Record<UnitKey, string> = {
 function CountdownUnit({
   label,
   value,
-  valueRef,
+  unitRef,
 }: {
   label: string;
   value: string;
-  valueRef: (node: HTMLSpanElement | null) => void;
+  unitRef: RefObject<HTMLSpanElement | null>;
 }) {
   return (
     <div className="countdown-unit flex min-w-0 flex-1 flex-col items-center gap-2 sm:gap-3">
       <span
-        ref={valueRef}
+        ref={unitRef}
         className="countdown-value font-display text-[clamp(2.15rem,10.5vw,3.75rem)] leading-none tracking-[-0.04em] text-ink tabular-nums"
         aria-hidden="true"
       >
@@ -47,32 +47,49 @@ function CountdownUnit({
 }
 
 export default function Countdown() {
-  const target = parseWeddingDateTime(wedding.event.dateTime);
+  const dateTime = wedding.event.dateTime;
+  const targetMs = useMemo(() => {
+    const parsed = parseWeddingDateTime(dateTime);
+    return parsed ? parsed.getTime() : null;
+  }, [dateTime]);
+
   const sectionRef = useRef<HTMLElement>(null);
   const ornamentRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLSpanElement>(null);
   const labelRef = useRef<HTMLParagraphElement>(null);
   const dateRef = useRef<HTMLParagraphElement>(null);
   const unitsWrapRef = useRef<HTMLDivElement>(null);
-  const valueRefs = useRef<Partial<Record<UnitKey, HTMLSpanElement | null>>>({});
+  const dayRef = useRef<HTMLSpanElement>(null);
+  const hourRef = useRef<HTMLSpanElement>(null);
+  const minuteRef = useRef<HTMLSpanElement>(null);
+  const secondRef = useRef<HTMLSpanElement>(null);
+  const unitRefs: Record<UnitKey, RefObject<HTMLSpanElement | null>> = {
+    days: dayRef,
+    hours: hourRef,
+    minutes: minuteRef,
+    seconds: secondRef,
+  };
   const prevValues = useRef<CountdownValues | null>(null);
   const pulseTween = useRef<gsap.core.Tween | null>(null);
 
   const [countdown, setCountdown] = useState<CountdownValues>(() =>
-    target ? getCountdown(target) : { days: 0, hours: 0, minutes: 0, seconds: 0, complete: true },
+    targetMs !== null
+      ? getCountdown(new Date(targetMs))
+      : { days: 0, hours: 0, minutes: 0, seconds: 0, complete: true },
   );
 
   useEffect(() => {
-    if (!target) return;
+    if (targetMs === null) return;
 
+    const target = new Date(targetMs);
     const tick = () => setCountdown(getCountdown(target));
     tick();
     const interval = window.setInterval(tick, 1000);
     return () => window.clearInterval(interval);
-  }, [target]);
+  }, [targetMs]);
 
   useEffect(() => {
-    if (!target) return;
+    if (targetMs === null) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
@@ -86,36 +103,20 @@ export default function Countdown() {
           start: "top 82%",
           once: true,
         },
-        defaults: { ease: "power2.out" },
+        defaults: { ease: "power2.out", immediateRender: false },
       });
 
-      tl.fromTo(
-        ornamentRef.current,
-        { scaleX: 0, opacity: 0 },
-        { scaleX: 1, opacity: 1, duration: 1.15 },
-      )
-        .fromTo(
+      tl.from(ornamentRef.current, { scaleX: 0, opacity: 0, duration: 1.15 })
+        .from(
           glowRef.current,
-          { opacity: 0, scale: 0.85 },
-          { opacity: 1, scale: 1, duration: 0.9 },
+          { opacity: 0, scale: 0.85, duration: 0.9 },
           "-=0.55",
         )
-        .fromTo(
-          labelRef.current,
-          { opacity: 0, y: 14 },
-          { opacity: 1, y: 0, duration: 0.75 },
-          "-=0.45",
-        )
-        .fromTo(
-          dateRef.current,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.7 },
-          "-=0.35",
-        )
-        .fromTo(
+        .from(labelRef.current, { opacity: 0, y: 14, duration: 0.75 }, "-=0.45")
+        .from(dateRef.current, { opacity: 0, y: 10, duration: 0.7 }, "-=0.35")
+        .from(
           unitsWrapRef.current?.querySelectorAll(".countdown-unit") ?? [],
-          { opacity: 0, y: 18 },
-          { opacity: 1, y: 0, duration: 0.8, stagger: 0.09 },
+          { opacity: 0, y: 18, duration: 0.8, stagger: 0.09 },
           "-=0.25",
         );
 
@@ -134,13 +135,18 @@ export default function Countdown() {
       pulseTween.current?.kill();
       ctx.revert();
     };
-  }, [target]);
+  }, [targetMs]);
 
   useEffect(() => {
-    if (!target) return;
+    if (targetMs === null) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce || !prevValues.current) {
+    if (reduce) {
+      prevValues.current = countdown;
+      return;
+    }
+
+    if (!prevValues.current) {
       prevValues.current = countdown;
       return;
     }
@@ -148,20 +154,33 @@ export default function Countdown() {
     UNITS.forEach((unit) => {
       if (prevValues.current![unit] === countdown[unit]) return;
 
-      const node = valueRefs.current[unit];
+      const node =
+        unit === "days"
+          ? dayRef.current
+          : unit === "hours"
+            ? hourRef.current
+            : unit === "minutes"
+              ? minuteRef.current
+              : secondRef.current;
       if (!node) return;
 
       gsap.fromTo(
         node,
         { opacity: 0.42, y: unit === "seconds" ? 2 : 4 },
-        { opacity: 1, y: 0, duration: unit === "seconds" ? 0.28 : 0.45, ease: "power1.out" },
+        {
+          opacity: 1,
+          y: 0,
+          duration: unit === "seconds" ? 0.28 : 0.45,
+          ease: "power1.out",
+          overwrite: "auto",
+        },
       );
     });
 
     prevValues.current = countdown;
-  }, [countdown, target]);
+  }, [countdown, targetMs]);
 
-  if (!target) return null;
+  if (targetMs === null) return null;
 
   const values: Record<UnitKey, string> = {
     days: padCountdownUnit(countdown.days),
@@ -180,7 +199,7 @@ export default function Countdown() {
       id="countdown"
       aria-live="polite"
       aria-atomic="true"
-      className="relative overflow-hidden border-y border-sand/35 bg-mist px-4 py-14 sm:px-6 sm:py-16 md:py-20"
+      className="relative overflow-x-hidden border-y border-sand/35 bg-mist px-4 py-14 sm:px-6 sm:py-16 md:py-20"
     >
       <div
         className="pointer-events-none absolute inset-0"
@@ -193,13 +212,19 @@ export default function Countdown() {
 
       <div className="relative mx-auto w-full max-w-3xl text-center">
         <div className="mb-8 flex items-center justify-center gap-3 sm:mb-10">
-          <div className="h-px flex-1 max-w-[4.5rem] bg-sand/55 sm:max-w-[5.5rem]" aria-hidden="true" />
+          <div
+            className="h-px flex-1 max-w-[4.5rem] bg-sand/55 sm:max-w-[5.5rem]"
+            aria-hidden="true"
+          />
           <span
             ref={glowRef}
             className="h-1.5 w-1.5 shrink-0 rounded-full bg-clay/80"
             aria-hidden="true"
           />
-          <div className="h-px flex-1 max-w-[4.5rem] bg-sand/55 sm:max-w-[5.5rem]" aria-hidden="true" />
+          <div
+            className="h-px flex-1 max-w-[4.5rem] bg-sand/55 sm:max-w-[5.5rem]"
+            aria-hidden="true"
+          />
         </div>
 
         <p
@@ -220,7 +245,10 @@ export default function Countdown() {
           <span className="text-muted">{wedding.event.displayTime}</span>
         </p>
 
-        <div ref={ornamentRef} className="mx-auto my-8 w-[min(220px,62vw)] origin-center sm:my-10">
+        <div
+          ref={ornamentRef}
+          className="mx-auto my-8 w-[min(220px,62vw)] origin-center sm:my-10"
+        >
           <div className="horizon-line" aria-hidden="true" />
         </div>
 
@@ -231,7 +259,7 @@ export default function Countdown() {
         ) : (
           <div
             ref={unitsWrapRef}
-            className="mx-auto grid max-w-[22rem] grid-cols-4 gap-x-1 gap-y-2 sm:max-w-none sm:gap-x-3 md:gap-x-5"
+            className="mx-auto grid w-full max-w-[22rem] grid-cols-4 gap-x-1 gap-y-2 sm:max-w-none sm:gap-x-3 md:gap-x-5"
             role="timer"
             aria-label={liveLabel}
           >
@@ -240,9 +268,7 @@ export default function Countdown() {
                 key={unit}
                 label={UNIT_LABELS[unit]}
                 value={values[unit]}
-                valueRef={(node) => {
-                  valueRefs.current[unit] = node;
-                }}
+                unitRef={unitRefs[unit]}
               />
             ))}
           </div>
@@ -251,11 +277,20 @@ export default function Countdown() {
         <p className="sr-only">{liveLabel}</p>
 
         <div className="mx-auto mt-8 flex items-center justify-center gap-3 sm:mt-10">
-          <div className="h-px flex-1 max-w-[4.5rem] bg-sand/45 sm:max-w-[5.5rem]" aria-hidden="true" />
-          <span className="font-display text-lg italic leading-none text-sage/80" aria-hidden="true">
+          <div
+            className="h-px flex-1 max-w-[4.5rem] bg-sand/45 sm:max-w-[5.5rem]"
+            aria-hidden="true"
+          />
+          <span
+            className="font-display text-lg italic leading-none text-sage/80"
+            aria-hidden="true"
+          >
             &
           </span>
-          <div className="h-px flex-1 max-w-[4.5rem] bg-sand/45 sm:max-w-[5.5rem]" aria-hidden="true" />
+          <div
+            className="h-px flex-1 max-w-[4.5rem] bg-sand/45 sm:max-w-[5.5rem]"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </section>
