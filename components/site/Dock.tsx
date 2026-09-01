@@ -1,12 +1,13 @@
 "use client";
 
 import { wedding } from "@/lib/content";
-import { Heart, Home, MapPin, Phone } from "lucide-react";
+import { Heart, Home, Images, MapPin, Phone } from "lucide-react";
 
 const items = [
   { href: "#home", label: "Home", icon: Home },
   { href: "#couple", label: "Couple", icon: Heart },
   { href: "#place", label: "Place", icon: MapPin },
+  { href: "#gallery", label: "Photos", icon: Images },
   { href: `tel:${wedding.contact.phoneTel}`, label: "Call", icon: Phone },
 ] as const;
 

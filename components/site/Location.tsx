@@ -3,13 +3,12 @@
 import { wedding } from "@/lib/content";
 import { ArrowUpRight } from "lucide-react";
 import { FadeUp, WordReveal } from "./Reveal";
-import { HorizonMark } from "./Mark";
 
 export default function Location() {
   return (
     <section
       id="place"
-      className="relative overflow-hidden bg-forest px-6 py-24 md:px-12 md:py-32"
+      className="relative overflow-hidden bg-forest pt-24 pb-12 md:pt-32 md:pb-16"
     >
       <div
         className="pointer-events-none absolute inset-0"
@@ -19,12 +18,11 @@ export default function Location() {
         }}
       />
 
-      <div className="relative mx-auto max-w-3xl text-center">
+      <div className="relative mx-auto max-w-4xl px-6 text-center md:px-12">
         <FadeUp>
           <p className="mb-5 font-sans text-[0.68rem] font-medium uppercase tracking-[0.38em] text-clay">
-            The place
+            Directions
           </p>
-          <HorizonMark className="mx-auto mb-8 h-7 w-14 text-sand/80" />
         </FadeUp>
 
         <WordReveal
@@ -34,19 +32,37 @@ export default function Location() {
 
         <FadeUp delay={0.12} className="mt-8">
           <p className="mx-auto max-w-md font-display text-[1.15rem] leading-relaxed text-sand/80">
-            Find Marian Center on the map for directions.
+            Find Marian Center on the map below.
           </p>
         </FadeUp>
+      </div>
 
-        <FadeUp delay={0.2} className="mt-12">
+      <FadeUp delay={0.2} className="relative mt-10 w-full">
+        <div className="relative h-[min(70vh,42rem)] w-full bg-forest-mid/40">
+          <iframe
+            title={`Map of ${wedding.location.name}`}
+            src={wedding.location.mapsEmbedUrl}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="absolute inset-0 h-full w-full grayscale-[0.15] contrast-[1.05] saturate-[0.92]"
+          />
+        </div>
+      </FadeUp>
+
+      <div className="relative mx-auto max-w-4xl px-6 text-center md:px-12">
+        <FadeUp delay={0.28} className="mt-8">
           <a
             href={wedding.location.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center gap-2 rounded-full bg-paper px-7 py-3 font-sans text-[0.72rem] font-medium uppercase tracking-[0.22em] text-ink transition-transform duration-300 active:scale-[0.98]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-sand/25 px-6 py-2.5 font-sans text-[0.68rem] font-medium uppercase tracking-[0.22em] text-sand/85 transition-colors hover:border-sand/45 hover:text-paper"
           >
             Open in Maps
-            <ArrowUpRight size={16} strokeWidth={1.6} />
+            <ArrowUpRight size={14} strokeWidth={1.6} />
           </a>
         </FadeUp>
       </div>

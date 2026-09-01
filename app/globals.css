@@ -76,6 +76,32 @@ section[id] {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Warm filmic grade applied to photographic content. */
+.cine-grade {
+  filter: brightness(0.94) contrast(1.12) saturate(1.06) sepia(0.06);
+}
+
+/* Darkened edges that pull the eye to the centre of a frame. */
+.cine-vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      transparent 38%,
+      rgba(20, 18, 16, 0.28) 78%,
+      rgba(20, 18, 16, 0.62) 100%
+    ),
+    linear-gradient(
+      to top,
+      rgba(20, 18, 16, 0.72) 0%,
+      rgba(20, 18, 16, 0.12) 42%,
+      transparent 70%
+    );
+}
+
 .horizon-line {
   height: 1px;
   background: linear-gradient(

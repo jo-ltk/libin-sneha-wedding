@@ -2,6 +2,7 @@ import Contact from "@/components/site/Contact";
 import Dock from "@/components/site/Dock";
 import Families from "@/components/site/Families";
 import Footer from "@/components/site/Footer";
+import Gallery from "@/components/site/Gallery";
 import Hero from "@/components/site/Hero";
 import Invitation from "@/components/site/Invitation";
 import Loader from "@/components/site/Loader";
@@ -23,6 +24,7 @@ export default function Home() {
         <Invitation />
         <Families />
         <Location />
+        <Gallery />
         <Contact />
       </main>
       <Footer />

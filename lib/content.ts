@@ -31,6 +31,8 @@ export const wedding = {
   location: {
     name: "Marian Center",
     mapsUrl: "https://share.google/FrFwA8MDCbTPmOxkY",
+    mapsEmbedUrl:
+      "https://maps.google.com/maps?q=Marian+Center&t=&z=15&ie=UTF8&iwloc=&output=embed",
   },
   contact: {
     phoneDisplay: "+91 95390 61358",
@@ -38,12 +40,37 @@ export const wedding = {
   },
 } as const;
 
+const photos = [
+  {
+    src: "/images/dsc01950.jpg",
+    alt: "Libin and Sneha — a tender moment together",
+    caption: "A quiet moment",
+  },
+  {
+    src: "/images/dsc02172.jpg",
+    alt: "Libin and Sneha — smiling among the trees",
+    caption: "Together in the woods",
+  },
+  {
+    src: "/images/dsc02140.jpg",
+    alt: "Libin and Sneha — walking hand in hand",
+    caption: "Walking on together",
+  },
+  {
+    src: "/images/wa207301.jpg",
+    alt: "Libin and Sneha — walking beneath the hills",
+    caption: "Beneath the hills",
+  },
+  {
+    src: "/images/wa20731.jpg",
+    alt: "Libin and Sneha — held close among the trees",
+    caption: "Held close",
+  },
+] as const;
+
 export const images = {
-  hero: [
-    { src: "/images/hero-1.jpg", alt: "Wedding rings on soft light" },
-    { src: "/images/hero-2.jpg", alt: "Floral wedding bouquet" },
-    { src: "/images/hero-3.jpg", alt: "Elegant wedding celebration" },
-  ],
+  hero: photos.map(({ src, alt }) => ({ src, alt })),
+  gallery: photos.slice(1),
 } as const;
 
 export const navLinks = [

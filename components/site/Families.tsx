@@ -1,9 +1,8 @@
 "use client";
 
 import { wedding } from "@/lib/content";
+import { motion } from "framer-motion";
 import { FadeUp, WordReveal } from "./Reveal";
-import { HorizonMark } from "./Mark";
-
 type Person = {
   role: string;
   firstName: string;
@@ -28,45 +27,50 @@ function FamilyPanel({
 
   return (
     <article
-      className={`relative flex min-h-[28rem] flex-col justify-between overflow-hidden px-7 py-10 md:min-h-[34rem] md:px-12 md:py-14 ${
-        isForest ? "bg-forest text-paper" : "bg-dusk text-paper"
+      className={`relative overflow-hidden ${
+        isForest ? "bg-forest" : "bg-dusk"
       }`}
     >
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background: isForest
-            ? "radial-gradient(ellipse at 80% 0%, rgba(194,116,98,0.16), transparent 50%)"
-            : "radial-gradient(ellipse at 10% 100%, rgba(220,203,184,0.14), transparent 48%)",
+            ? "radial-gradient(ellipse at 50% 20%, rgba(42,64,54,0.55) 0%, transparent 60%)"
+            : "radial-gradient(ellipse at 50% 20%, rgba(77,50,58,0.55) 0%, transparent 60%)",
         }}
+        aria-hidden="true"
       />
 
-      <div className="relative">
-        <p className="mb-8 font-sans text-[0.62rem] font-medium uppercase tracking-[0.36em] text-sand/70">
-          {person.role}
-        </p>
-        <h3 className="font-display text-[clamp(2.8rem,8vw,4.6rem)] leading-[0.9] tracking-[-0.04em]">
-          {person.firstName}
-        </h3>
-        <p className="mt-2 font-display text-[1.35rem] italic text-sand/90 md:text-[1.55rem]">
-          {person.lastName}
-        </p>
-      </div>
+      <div className="relative flex flex-col items-center gap-8 px-7 py-10 text-center text-paper md:px-12 md:py-14">
+        <div>
+          <p className="mb-4 font-sans text-[0.62rem] font-medium uppercase tracking-[0.38em] text-sand/75">
+            {person.role}
+          </p>
+          <h3 className="font-display text-[clamp(3.2rem,12vw,5.5rem)] leading-[0.88] tracking-[-0.045em]">
+            {person.firstName}
+          </h3>
+          <p className="mt-3 font-display text-[clamp(1.15rem,3.2vw,1.7rem)] italic text-sand/85">
+            {person.lastName}
+          </p>
+          <p className="mt-5 font-sans text-[0.68rem] uppercase tracking-[0.32em] text-clay">
+            {person.district}
+          </p>
+        </div>
 
-      <div className="relative mt-12 space-y-6">
-        <HorizonMark className={`h-6 w-12 ${isForest ? "text-clay" : "text-sand"}`} />
-        <p className="font-sans text-[0.78rem] font-light uppercase tracking-[0.18em] text-sand/75">
-          {childOf} {person.father}
-          <br />
-          &amp; {person.mother}
-        </p>
-        <p className="max-w-[16rem] font-display text-[1.15rem] leading-relaxed text-paper/90">
-          {person.house}
-          <br />
-          {person.place}
-          <br />
-          {person.district}
-        </p>
+        <div className="space-y-4">
+          <p className="font-sans text-[0.78rem] font-light uppercase tracking-[0.18em] text-sand/75">
+            {childOf} {person.father}
+            <br />
+            &amp; {person.mother}
+          </p>
+          <p className="mx-auto max-w-[16rem] font-display text-[1.15rem] leading-relaxed text-paper/90">
+            {person.house}
+            <br />
+            {person.place}
+            <br />
+            {person.district}
+          </p>
+        </div>
       </div>
     </article>
   );
@@ -87,13 +91,37 @@ export default function Families() {
         />
       </div>
 
-      <div className="grid md:grid-cols-2">
-        <FadeUp y={36}>
-          <FamilyPanel person={wedding.groom} childOf="Son of" tone="forest" />
-        </FadeUp>
-        <FadeUp y={36} delay={0.12}>
-          <FamilyPanel person={wedding.bride} childOf="Daughter of" tone="dusk" />
-        </FadeUp>
+      <div className="relative">
+        <div className="grid md:grid-cols-2">
+          <FadeUp y={36}>
+            <FamilyPanel
+              person={wedding.groom}
+              childOf="Son of"
+              tone="forest"
+            />
+          </FadeUp>
+          <FadeUp y={36} delay={0.12}>
+            <FamilyPanel
+              person={wedding.bride}
+              childOf="Daughter of"
+              tone="dusk"
+            />
+          </FadeUp>
+        </div>
+
+        <motion.div
+          className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
+          initial={{ scale: 0.6, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-sand/30 bg-paper shadow-[0_10px_30px_rgba(20,18,16,0.22)] md:h-16 md:w-16">
+            <span className="font-display text-2xl italic leading-none text-clay md:text-[1.7rem]">
+              &
+            </span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

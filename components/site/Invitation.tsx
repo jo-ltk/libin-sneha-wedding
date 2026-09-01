@@ -2,7 +2,6 @@
 
 import { wedding } from "@/lib/content";
 import { FadeUp, LineGrow } from "./Reveal";
-import { HorizonMark } from "./Mark";
 
 export default function Invitation() {
   return (
@@ -15,7 +14,6 @@ export default function Invitation() {
           <p className="mb-6 font-sans text-[0.68rem] font-medium uppercase tracking-[0.38em] text-clay">
             An invitation
           </p>
-          <HorizonMark className="mx-auto mb-10 h-7 w-14 text-sage" />
         </FadeUp>
 
         <FadeUp delay={0.08}>

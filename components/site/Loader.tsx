@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { HorizonMark } from "./Mark";
 import { wedding } from "@/lib/content";
 
 export default function Loader() {
@@ -55,7 +54,6 @@ export default function Loader() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <HorizonMark className="mb-7 h-8 w-14 text-clay" />
             <p className="font-display text-[clamp(2.4rem,10vw,3.6rem)] leading-none tracking-[-0.03em] text-paper">
               {wedding.couple.groomsName}
               <span className="mx-2 italic text-clay"> & </span>
