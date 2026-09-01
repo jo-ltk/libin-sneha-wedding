@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f3eee6;
+  --mist: #e6ebe3;
+  --ink: #141210;
+  --forest: #1c2b24;
+  --forest-mid: #2a4036;
+  --dusk: #3a242c;
+  --dusk-mid: #4d323a;
+  --clay: #c27462;
+  --clay-deep: #a85a4a;
+  --sage: #8b9a8c;
+  --sand: #dccbb8;
+  --muted: #6f675e;
+  --line: rgba(194, 116, 98, 0.35);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-ink: var(--ink);
+  --color-forest: var(--forest);
+  --color-forest-mid: var(--forest-mid);
+  --color-dusk: var(--dusk);
+  --color-dusk-mid: var(--dusk-mid);
+  --color-clay: var(--clay);
+  --color-clay-deep: var(--clay-deep);
+  --color-sage: var(--sage);
+  --color-sand: var(--sand);
+  --color-muted: var(--muted);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background: var(--forest);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--clay);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 3px;
+}
+
+section[id] {
+  scroll-margin-top: 1rem;
+  scroll-margin-bottom: 4.5rem;
+}
+
+.font-display {
+  font-family: var(--font-display), "Times New Roman", serif;
+}
+
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.horizon-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--clay) 20%,
+    var(--sand) 50%,
+    var(--clay) 80%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .grain {
+    display: none;
+  }
 }
