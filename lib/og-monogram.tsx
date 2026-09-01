@@ -39,8 +39,8 @@ export async function createMonogramImageResponse() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#2a3d32",
-          color: "#faf9f7",
+          background: "#faf8f4",
+          color: "#3d4a50",
           position: "relative",
           fontFamily: "Bodoni Moda",
         }}
@@ -50,7 +50,7 @@ export async function createMonogramImageResponse() {
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(ellipse at 50% 35%, rgba(106,173,201,0.22) 0%, transparent 55%), radial-gradient(ellipse at 20% 80%, rgba(58,82,68,0.65) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(44,58,66,0.55) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 50% 35%, rgba(133,189,214,0.28) 0%, transparent 55%), radial-gradient(ellipse at 20% 80%, rgba(168,200,172,0.35) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(133,189,214,0.2) 0%, transparent 50%)",
           }}
         />
 
@@ -58,7 +58,7 @@ export async function createMonogramImageResponse() {
           style={{
             position: "absolute",
             inset: 48,
-            border: "1px solid rgba(184, 212, 188, 0.22)",
+            border: "1px solid rgba(197, 220, 200, 0.55)",
             borderRadius: 4,
             display: "flex",
           }}
@@ -71,7 +71,7 @@ export async function createMonogramImageResponse() {
             fontSize: 22,
             letterSpacing: 12,
             textTransform: "uppercase",
-            color: "#b8d4bc",
+            color: "#6f7d82",
             fontFamily: "Outfit",
           }}
         >
@@ -93,7 +93,7 @@ export async function createMonogramImageResponse() {
               fontSize: 220,
               lineHeight: 1,
               letterSpacing: -8,
-              color: "#faf9f7",
+              color: "#3d4a50",
             }}
           >
             L
@@ -104,15 +104,15 @@ export async function createMonogramImageResponse() {
               width: 88,
               height: 88,
               borderRadius: 999,
-              background: "#faf9f7",
-              color: "#6aadc9",
+              background: "#85bdd6",
+              color: "#faf8f4",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: 48,
               fontStyle: "italic",
               marginTop: 24,
-              boxShadow: "0 18px 48px rgba(26,35,40,0.35)",
+              boxShadow: "0 18px 48px rgba(61,74,80,0.12)",
             }}
           >
             &
@@ -123,7 +123,7 @@ export async function createMonogramImageResponse() {
               fontSize: 220,
               lineHeight: 1,
               letterSpacing: -8,
-              color: "#b8d4bc",
+              color: "#a8c8ac",
             }}
           >
             S
@@ -138,7 +138,7 @@ export async function createMonogramImageResponse() {
             fontSize: 64,
             letterSpacing: -2,
             fontStyle: "italic",
-            color: "#faf9f7",
+            color: "#3d4a50",
           }}
         >
           Libin & Sneha
@@ -152,7 +152,7 @@ export async function createMonogramImageResponse() {
             fontSize: 24,
             letterSpacing: 10,
             textTransform: "uppercase",
-            color: "#6aadc9",
+            color: "#6aa8c9",
             fontFamily: "Outfit",
           }}
         >

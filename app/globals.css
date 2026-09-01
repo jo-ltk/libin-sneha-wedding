@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #faf9f7;
-  --mist: #eef4f6;
-  --ink: #1a2328;
-  --forest: #2a3d32;
-  --forest-mid: #3a5244;
-  --dusk: #2c3a42;
-  --dusk-mid: #3d4f58;
-  --clay: #6aadc9;
-  --clay-deep: #4a94b8;
-  --sage: #9cb8a0;
-  --sand: #b8d4bc;
-  --muted: #647278;
-  --line: rgba(106, 173, 201, 0.35);
+  --paper: #faf8f4;
+  --mist: #eef4f8;
+  --ink: #3d4a50;
+  --forest: #edf5ee;
+  --forest-mid: #dceee2;
+  --dusk: #ecf4f8;
+  --dusk-mid: #ddeaf2;
+  --clay: #85bdd6;
+  --clay-deep: #6aa8c9;
+  --sage: #a8c8ac;
+  --sand: #c5dcc8;
+  --muted: #6f7d82;
+  --line: rgba(133, 189, 214, 0.4);
 }
 
 @theme inline {
@@ -35,7 +35,7 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--forest);
+  background: var(--paper);
 }
 
 body {
@@ -71,17 +71,17 @@ section[id] {
   position: fixed;
   inset: 0;
   z-index: 30;
-  opacity: 0.055;
+  opacity: 0.04;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Soft filmic grade applied to photographic content. */
 .cine-grade {
-  filter: brightness(0.95) contrast(1.1) saturate(1.04) sepia(0.02);
+  filter: brightness(0.97) contrast(1.06) saturate(1.02) sepia(0.01);
 }
 
-/* Darkened edges that pull the eye to the centre of a frame. */
+/* Softened edges for gallery frames on light backgrounds. */
 .cine-vignette::after {
   content: "";
   position: absolute;
@@ -90,14 +90,14 @@ section[id] {
   background:
     radial-gradient(
       ellipse at 50% 45%,
-      transparent 38%,
-      rgba(26, 35, 40, 0.28) 78%,
-      rgba(26, 35, 40, 0.62) 100%
+      transparent 42%,
+      rgba(61, 74, 80, 0.12) 82%,
+      rgba(61, 74, 80, 0.28) 100%
     ),
     linear-gradient(
       to top,
-      rgba(26, 35, 40, 0.72) 0%,
-      rgba(26, 35, 40, 0.12) 42%,
+      rgba(61, 74, 80, 0.45) 0%,
+      rgba(61, 74, 80, 0.08) 42%,
       transparent 70%
     );
 }

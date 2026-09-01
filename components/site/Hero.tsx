@@ -24,7 +24,7 @@ export default function Hero() {
     <section
       ref={ref}
       id="home"
-      className="relative h-[100svh] min-h-[640px] overflow-hidden bg-forest"
+      className="relative h-[100svh] min-h-[640px] overflow-hidden bg-paper"
     >
       <ParallaxImage
         className="absolute inset-0"
@@ -55,7 +55,7 @@ export default function Hero() {
             className="object-cover object-[center_28%] md:object-center"
             style={{
               filter:
-                "brightness(0.74) contrast(1.16) saturate(1.08) sepia(0.02)",
+                "brightness(0.88) contrast(1.08) saturate(1.04) sepia(0.01)",
             }}
           />
         </motion.div>
@@ -65,21 +65,21 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(26,35,40,0.45) 0%, rgba(26,35,40,0.08) 38%, rgba(26,35,40,0.55) 72%, rgba(26,35,40,0.92) 100%)",
+            "linear-gradient(to bottom, rgba(250,248,244,0.15) 0%, rgba(250,248,244,0.02) 38%, rgba(250,248,244,0.55) 72%, rgba(250,248,244,0.92) 100%)",
         }}
       />
       <div
-        className="pointer-events-none absolute inset-0 opacity-70"
+        className="pointer-events-none absolute inset-0 opacity-80"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 88%, rgba(106,173,201,0.28), transparent 55%)",
+            "radial-gradient(ellipse at 50% 88%, rgba(133,189,214,0.22), transparent 55%)",
         }}
       />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 42%, transparent 34%, rgba(26,35,40,0.42) 82%, rgba(26,35,40,0.78) 100%)",
+            "radial-gradient(ellipse at 50% 42%, transparent 50%, rgba(168,200,172,0.12) 82%, rgba(250,248,244,0.35) 100%)",
         }}
       />
 
@@ -91,7 +91,7 @@ export default function Hero() {
           initial={reduce ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: enter, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.42em] text-sand/85"
+          className="mb-5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.42em] text-muted"
         >
           Together with their families
         </motion.p>
@@ -100,8 +100,8 @@ export default function Hero() {
           initial={reduce ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: enter + 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-[clamp(3.2rem,13vw,6.5rem)] leading-[0.92] tracking-[-0.04em] text-paper"
-          style={{ textShadow: "0 4px 28px rgba(0,0,0,0.35)" }}
+          className="font-display text-[clamp(3.2rem,13vw,6.5rem)] leading-[0.92] tracking-[-0.04em] text-ink"
+          style={{ textShadow: "0 2px 24px rgba(250,248,244,0.85)" }}
         >
           {wedding.couple.groomsName}
           <span className="mx-2 italic text-clay">&</span>
@@ -114,16 +114,16 @@ export default function Hero() {
           transition={{ delay: enter + 0.35, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="my-7 flex w-[min(220px,58vw)] items-center gap-3"
         >
-          <div className="h-px flex-1 bg-sand/35" />
+          <div className="h-px flex-1 bg-sand/50" />
           <span className="h-1 w-1 shrink-0 rounded-full bg-clay" aria-hidden="true" />
-          <div className="h-px flex-1 bg-sand/35" />
+          <div className="h-px flex-1 bg-sand/50" />
         </motion.div>
 
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: enter + 0.45, duration: 0.8 }}
-          className="font-sans text-[0.68rem] uppercase tracking-[0.34em] text-sand/75"
+          className="font-sans text-[0.68rem] uppercase tracking-[0.34em] text-muted"
         >
           {wedding.groom.district} · {wedding.bride.district}
         </motion.p>
@@ -131,14 +131,14 @@ export default function Hero() {
 
       <motion.a
         href="#invitation"
-        className="absolute bottom-[calc(4rem+env(safe-area-inset-bottom))] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-paper/60 md:bottom-6"
+        className="absolute bottom-[calc(4rem+env(safe-area-inset-bottom))] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-ink/45 md:bottom-6"
         initial={reduce ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: enter + 0.7, duration: 0.8 }}
         aria-label="Scroll to invitation"
       >
         <motion.span
-          className="h-7 w-px bg-paper/35"
+          className="h-7 w-px bg-ink/25"
           animate={
             reduce ? undefined : { scaleY: [1, 0.45, 1], opacity: [0.45, 1, 0.45] }
           }

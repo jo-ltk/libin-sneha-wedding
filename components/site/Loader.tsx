@@ -29,7 +29,7 @@ export default function Loader() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[80] flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[80] flex items-center justify-center overflow-hidden bg-paper"
           initial={{ opacity: 1 }}
           exit={{ opacity: 1 }}
           transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
@@ -54,12 +54,12 @@ export default function Loader() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="font-display text-[clamp(2.4rem,10vw,3.6rem)] leading-none tracking-[-0.03em] text-paper">
+            <p className="font-display text-[clamp(2.4rem,10vw,3.6rem)] leading-none tracking-[-0.03em] text-ink">
               {wedding.couple.groomsName}
               <span className="mx-2 italic text-clay"> & </span>
               {wedding.couple.bridesName}
             </p>
-            <p className="mt-5 font-sans text-[0.68rem] font-light uppercase tracking-[0.42em] text-sand/80">
+            <p className="mt-5 font-sans text-[0.68rem] font-light uppercase tracking-[0.42em] text-muted">
               A wedding
             </p>
           </motion.div>

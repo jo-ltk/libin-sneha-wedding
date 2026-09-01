@@ -56,7 +56,7 @@ function GalleryFrame({
       <motion.button
         type="button"
         onClick={() => onOpen(index)}
-        className={`cine-vignette group relative block ${config.aspect} w-full overflow-hidden rounded-[2px] bg-ink text-left shadow-[0_40px_120px_-30px_rgba(0,0,0,0.85)]`}
+        className={`cine-vignette group relative block ${config.aspect} w-full overflow-hidden rounded-[2px] bg-paper text-left shadow-[0_24px_64px_-20px_rgba(61,74,80,0.18)]`}
         initial={false}
         animate={
           reduce || isInView
@@ -79,7 +79,7 @@ function GalleryFrame({
           />
         </motion.div>
 
-        <div className="absolute inset-0 rounded-[2px] ring-1 ring-inset ring-paper/12 transition-colors duration-700 group-hover:ring-clay/40" />
+        <div className="absolute inset-0 rounded-[2px] ring-1 ring-inset ring-sand/40 transition-colors duration-700 group-hover:ring-clay/50" />
 
         <div className="absolute inset-x-0 bottom-0 z-10 px-6 pb-6 md:px-8 md:pb-8">
           <motion.div
@@ -129,7 +129,7 @@ function Lightbox({
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/96 px-4 backdrop-blur-lg"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-paper/92 px-4 backdrop-blur-lg"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -139,7 +139,7 @@ function Lightbox({
       <button
         type="button"
         onClick={onClose}
-        className="absolute right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-paper/10 text-paper transition-colors hover:bg-paper/20"
+        className="absolute right-4 top-4 z-10 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-clay/15 text-ink transition-colors hover:bg-clay/25"
         aria-label="Close gallery"
       >
         <X size={20} strokeWidth={1.6} />
@@ -190,7 +190,7 @@ function Lightbox({
               onNavigate(index);
             }}
             className={`h-1.5 rounded-full transition-all duration-500 ${
-              index === active ? "w-8 bg-clay" : "w-1.5 bg-paper/35"
+              index === active ? "w-8 bg-clay" : "w-1.5 bg-sand/60"
             }`}
           />
         ))}
@@ -211,13 +211,13 @@ export default function Gallery() {
   return (
     <section
       id="gallery"
-      className="relative overflow-hidden bg-ink px-6 pt-28 pb-14 md:px-12 md:pt-40 md:pb-20"
+      className="relative overflow-hidden bg-paper px-6 pt-28 pb-14 md:px-12 md:pt-40 md:pb-20"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-90"
         style={{
           background:
-            "radial-gradient(ellipse at 12% 8%, rgba(106,173,201,0.16), transparent 48%), radial-gradient(ellipse at 88% 92%, rgba(58,82,68,0.5), transparent 52%)",
+            "radial-gradient(ellipse at 12% 8%, rgba(133,189,214,0.18), transparent 48%), radial-gradient(ellipse at 88% 92%, rgba(168,200,172,0.22), transparent 52%)",
         }}
       />
 
@@ -231,11 +231,11 @@ export default function Gallery() {
 
           <WordReveal
             text="Our gallery."
-            className="font-display text-[clamp(2.6rem,8vw,5.2rem)] leading-[0.95] tracking-[-0.04em] text-paper"
+            className="font-display text-[clamp(2.6rem,8vw,5.2rem)] leading-[0.95] tracking-[-0.04em] text-ink"
           />
 
           <FadeUp delay={0.1} className="mt-6">
-            <p className="font-display text-[1.05rem] leading-relaxed text-sand/70">
+            <p className="font-display text-[1.05rem] leading-relaxed text-muted">
               A few frames from the journey — tap any photo to view it full size.
             </p>
           </FadeUp>

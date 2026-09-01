@@ -29,7 +29,7 @@ export default function Contact() {
             href={`tel:${wedding.contact.phoneTel}`}
             className="group inline-flex flex-col items-center"
           >
-            <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-forest text-paper">
+            <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-clay text-paper">
               <Phone size={20} strokeWidth={1.5} />
             </span>
             <span className="font-display text-[clamp(1.7rem,6vw,2.6rem)] tracking-[-0.03em] text-ink">

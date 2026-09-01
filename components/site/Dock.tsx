@@ -17,7 +17,7 @@ export default function Dock() {
       className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-4 pb-[max(0.45rem,env(safe-area-inset-bottom))] md:hidden"
       aria-label="Quick navigation"
     >
-      <div className="pointer-events-auto flex items-center gap-0.5 rounded-full border border-sand/30 bg-paper/88 px-1.5 py-1 shadow-[0_6px_24px_rgba(26,35,40,0.1)] backdrop-blur-xl">
+      <div className="pointer-events-auto flex items-center gap-0.5 rounded-full border border-sand/50 bg-paper/92 px-1.5 py-1 shadow-[0_6px_24px_rgba(61,74,80,0.08)] backdrop-blur-xl">
         {items.map((item) => {
           const Icon = item.icon;
           return (
