@@ -35,7 +35,7 @@ export default function Loader() {
           transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div
-            className="absolute inset-y-0 left-0 w-1/2 bg-forest"
+            className="absolute inset-y-0 left-0 w-1/2 bg-paper"
             initial={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
