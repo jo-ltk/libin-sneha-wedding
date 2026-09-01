@@ -34,6 +34,12 @@ export const wedding = {
     mapsEmbedUrl:
       "https://maps.google.com/maps?q=Marian+Center,+Marykulam,+Kerala+685507&z=15&output=embed",
   },
+  event: {
+    /** ISO 8601 ceremony date & time in India Standard Time (UTC+05:30). */
+    dateTime: "",
+    displayDate: "",
+    displayTime: "",
+  },
   contact: {
     phoneDisplay: "+91 95390 61358",
     phoneTel: "+919539061358",

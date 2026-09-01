@@ -1,4 +1,5 @@
 import Contact from "@/components/site/Contact";
+import Countdown from "@/components/site/Countdown";
 import Dock from "@/components/site/Dock";
 import Families from "@/components/site/Families";
 import Footer from "@/components/site/Footer";
@@ -21,6 +22,7 @@ export default function Home() {
       <Loader />
       <main>
         <Hero />
+        <Countdown />
         <Invitation />
         <Families />
         <Location />
