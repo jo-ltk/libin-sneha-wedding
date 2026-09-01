@@ -15,8 +15,11 @@ const sans = Outfit({
   display: "swap",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://libin-sneha-wedding.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(siteUrl),
   title: "Libin & Sneha | Wedding",
   description:
     "With the blessing of God and their families, Libin Benny and Sneha Johnson invite you to celebrate their marriage.",
@@ -37,6 +40,15 @@ export const metadata: Metadata = {
     locale: "en_IN",
     type: "website",
     siteName: "Libin & Sneha Wedding",
+    url: siteUrl,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Libin & Sneha — Wedding monogram",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
