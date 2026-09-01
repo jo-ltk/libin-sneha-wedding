@@ -30,9 +30,9 @@ export const wedding = {
   },
   location: {
     name: "Marian Center",
-    mapsUrl: "https://share.google/FrFwA8MDCbTPmOxkY",
+    mapsUrl: "https://maps.app.goo.gl/6k7cHdM6PRZCfGZz5?g_st=ic",
     mapsEmbedUrl:
-      "https://maps.google.com/maps?q=Marian+Center&t=&z=15&ie=UTF8&iwloc=&output=embed",
+      "https://maps.google.com/maps?q=Marian+Center,+Marykulam,+Kerala+685507&z=15&output=embed",
   },
   contact: {
     phoneDisplay: "+91 95390 61358",
