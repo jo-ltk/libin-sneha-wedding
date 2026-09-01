@@ -80,8 +80,8 @@ export const images = {
   familyMeeting: [
     {
       src: "/images/family-meeting-1.jpg",
-      alt: "Libin and Sneha with their families at their first meeting",
-      caption: "A warm welcome",
+      alt: "Libin and Sneha with their families as two homes came together",
+      caption: "Where our families embraced",
     },
     {
       src: "/images/family-meeting-2.jpg",
