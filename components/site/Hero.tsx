@@ -55,7 +55,7 @@ export default function Hero() {
             className="object-cover object-[center_28%] md:object-center"
             style={{
               filter:
-                "brightness(0.74) contrast(1.16) saturate(1.12) sepia(0.08)",
+                "brightness(0.74) contrast(1.16) saturate(1.08) sepia(0.02)",
             }}
           />
         </motion.div>
@@ -65,21 +65,21 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(20,18,16,0.45) 0%, rgba(20,18,16,0.08) 38%, rgba(20,18,16,0.55) 72%, rgba(20,18,16,0.92) 100%)",
+            "linear-gradient(to bottom, rgba(26,35,40,0.45) 0%, rgba(26,35,40,0.08) 38%, rgba(26,35,40,0.55) 72%, rgba(26,35,40,0.92) 100%)",
         }}
       />
       <div
         className="pointer-events-none absolute inset-0 opacity-70"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 88%, rgba(194,116,98,0.28), transparent 55%)",
+            "radial-gradient(ellipse at 50% 88%, rgba(106,173,201,0.28), transparent 55%)",
         }}
       />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 42%, transparent 34%, rgba(20,18,16,0.42) 82%, rgba(20,18,16,0.78) 100%)",
+            "radial-gradient(ellipse at 50% 42%, transparent 34%, rgba(26,35,40,0.42) 82%, rgba(26,35,40,0.78) 100%)",
         }}
       />
 

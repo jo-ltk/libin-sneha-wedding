@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f3eee6;
-  --mist: #e6ebe3;
-  --ink: #141210;
-  --forest: #1c2b24;
-  --forest-mid: #2a4036;
-  --dusk: #3a242c;
-  --dusk-mid: #4d323a;
-  --clay: #c27462;
-  --clay-deep: #a85a4a;
-  --sage: #8b9a8c;
-  --sand: #dccbb8;
-  --muted: #6f675e;
-  --line: rgba(194, 116, 98, 0.35);
+  --paper: #faf9f7;
+  --mist: #eef4f6;
+  --ink: #1a2328;
+  --forest: #2a3d32;
+  --forest-mid: #3a5244;
+  --dusk: #2c3a42;
+  --dusk-mid: #3d4f58;
+  --clay: #6aadc9;
+  --clay-deep: #4a94b8;
+  --sage: #9cb8a0;
+  --sand: #b8d4bc;
+  --muted: #647278;
+  --line: rgba(106, 173, 201, 0.35);
 }
 
 @theme inline {
@@ -76,9 +76,9 @@ section[id] {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Warm filmic grade applied to photographic content. */
+/* Soft filmic grade applied to photographic content. */
 .cine-grade {
-  filter: brightness(0.94) contrast(1.12) saturate(1.06) sepia(0.06);
+  filter: brightness(0.95) contrast(1.1) saturate(1.04) sepia(0.02);
 }
 
 /* Darkened edges that pull the eye to the centre of a frame. */
@@ -91,13 +91,13 @@ section[id] {
     radial-gradient(
       ellipse at 50% 45%,
       transparent 38%,
-      rgba(20, 18, 16, 0.28) 78%,
-      rgba(20, 18, 16, 0.62) 100%
+      rgba(26, 35, 40, 0.28) 78%,
+      rgba(26, 35, 40, 0.62) 100%
     ),
     linear-gradient(
       to top,
-      rgba(20, 18, 16, 0.72) 0%,
-      rgba(20, 18, 16, 0.12) 42%,
+      rgba(26, 35, 40, 0.72) 0%,
+      rgba(26, 35, 40, 0.12) 42%,
       transparent 70%
     );
 }

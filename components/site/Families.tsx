@@ -35,8 +35,8 @@ function FamilyPanel({
         className="pointer-events-none absolute inset-0"
         style={{
           background: isForest
-            ? "radial-gradient(ellipse at 50% 20%, rgba(42,64,54,0.55) 0%, transparent 60%)"
-            : "radial-gradient(ellipse at 50% 20%, rgba(77,50,58,0.55) 0%, transparent 60%)",
+            ? "radial-gradient(ellipse at 50% 20%, rgba(58,82,68,0.55) 0%, transparent 60%)"
+            : "radial-gradient(ellipse at 50% 20%, rgba(61,79,88,0.55) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />
@@ -116,7 +116,7 @@ export default function Families() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-sand/30 bg-paper shadow-[0_10px_30px_rgba(20,18,16,0.22)] md:h-16 md:w-16">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-sand/30 bg-paper shadow-[0_10px_30px_rgba(26,35,40,0.22)] md:h-16 md:w-16">
             <span className="font-display text-2xl italic leading-none text-clay md:text-[1.7rem]">
               &
             </span>

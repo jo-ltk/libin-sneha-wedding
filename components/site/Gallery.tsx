@@ -217,7 +217,7 @@ export default function Gallery() {
         className="pointer-events-none absolute inset-0 opacity-90"
         style={{
           background:
-            "radial-gradient(ellipse at 12% 8%, rgba(194,116,98,0.16), transparent 48%), radial-gradient(ellipse at 88% 92%, rgba(42,64,54,0.5), transparent 52%)",
+            "radial-gradient(ellipse at 12% 8%, rgba(106,173,201,0.16), transparent 48%), radial-gradient(ellipse at 88% 92%, rgba(58,82,68,0.5), transparent 52%)",
         }}
       />
 

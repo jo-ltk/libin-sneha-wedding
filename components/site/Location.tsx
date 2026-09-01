@@ -14,7 +14,7 @@ export default function Location() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 0%, rgba(194,116,98,0.18), transparent 42%), radial-gradient(ellipse at 100% 100%, rgba(139,154,140,0.18), transparent 40%)",
+            "radial-gradient(ellipse at 50% 0%, rgba(106,173,201,0.18), transparent 42%), radial-gradient(ellipse at 100% 100%, rgba(156,184,160,0.18), transparent 40%)",
         }}
       />
 
