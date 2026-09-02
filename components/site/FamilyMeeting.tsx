@@ -1,7 +1,6 @@
 "use client";
 
-import { familyMeeting, images } from "@/lib/content";
-import Image from "next/image";
+import { familyMeeting } from "@/lib/content";
 import { FadeUp, LineGrow, WordReveal } from "./Reveal";
 
 export default function FamilyMeeting() {
@@ -39,31 +38,6 @@ export default function FamilyMeeting() {
               {familyMeeting.subheading}
             </p>
           </FadeUp>
-        </div>
-
-        <div className="mt-12 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-6 md:gap-8">
-          {images.familyMeeting.map((photo, index) => (
-            <FadeUp key={photo.src} delay={0.08 + index * 0.1}>
-              <figure className="group overflow-hidden rounded-2xl border border-sand/45 bg-paper shadow-[0_20px_56px_-28px_rgba(61,74,80,0.16)]">
-                <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[3/4]">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                    quality={88}
-                    className="cine-grade object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
-                  />
-                  <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-sand/30" />
-                </div>
-                <figcaption className="border-t border-sand/35 px-5 py-4 text-center">
-                  <p className="font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] text-clay">
-                    {photo.caption}
-                  </p>
-                </figcaption>
-              </figure>
-            </FadeUp>
-          ))}
         </div>
       </div>
     </section>

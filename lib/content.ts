@@ -77,18 +77,6 @@ const photos = [
 export const images = {
   hero: photos.map(({ src, alt }) => ({ src, alt })),
   gallery: photos.slice(1),
-  familyMeeting: [
-    {
-      src: "/images/family-meeting-1.jpg",
-      alt: "Libin and Sneha with their families as two homes came together",
-      caption: "Where our families embraced",
-    },
-    {
-      src: "/images/family-meeting-2.jpg",
-      alt: "Libin and Sneha standing together as their families came together",
-      caption: "Two families, one joy",
-    },
-  ],
 } as const;
 
 export const familyMeeting = {
